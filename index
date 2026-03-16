@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Ketrin!</title>
+    <style>
+        /* --- CUTIE MODE (Default) --- */
+        body {
+            background-color: #ffe6ea;
+            color: #ff6b81;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            transition: all 0.6s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(255, 107, 129, 0.2);
+            max-width: 350px;
+            transition: all 0.6s ease;
+        }
+        img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #ff6b81;
+            transition: all 0.6s ease;
+            margin-bottom: 10px;
+        }
+        h1 { margin-top: 10px; font-size: 28px; transition: all 0.6s ease; }
+        p { font-size: 16px; line-height: 1.5; transition: all 0.6s ease; }
+
+        /* --- BADDIE MODE --- */
+        body.baddie-mode {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .baddie-mode .container {
+            background: #1e1e1e;
+            box-shadow: 0 10px 30px rgba(186, 0, 0, 0.4);
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+        .baddie-mode img {
+            border-color: #ba0000;
+            border-radius: 15px;
+        }
+        .baddie-mode h1 {
+            color: #ba0000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- TOGGLE SWITCH --- */
+        .switch-container {
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ff6b81;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px; width: 26px;
+            left: 4px; bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #ba0000; }
+        input:checked + .slider:before { transform: translateX(26px); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="profile-pic" src="https://github.com/rezawahyuramadhani01-droid/ketrin-birthday/raw/main/cutie-photo.jpg" alt="Ketrin">
+        
+        <h1 id="greeting">Happy Birthday, Ketrin!</h1>
+        
+        <div class="switch-container">
+            <span id="label-cutie">Cutie</span>
+            <label class="switch">
+                <input type="checkbox" id="mode-toggle">
+                <span class="slider"></span>
+            </label>
+            <span id="label-baddie">Baddie</span>
+        </div>
+
+        <p id="message">To the girl who makes every day brighter. Hope your birthday is as sweet and amazing as you are!</p>
+    </div>
+
+    <audio id="audio-cutie" src="https://github.com/rezawahyuramadhani01-droid/ketrin-birthday/raw/refs/heads/main/Cutie-song.mp3" loop></audio>
+    <audio id="audio-baddie" src="https://github.com/rezawahyuramadhani01-droid/ketrin-birthday/raw/refs/heads/main/Baddie-song.mp3" loop></audio>
+
+    <script>
+        const toggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        const greeting = document.getElementById('greeting');
+        const message = document.getElementById('message');
+        const profilePic = document.getElementById('profile-pic');
+        
+        const audioCutie = document.getElementById('audio-cutie');
+        const audioBaddie = document.getElementById('audio-baddie');
+
+        toggle.addEventListener('change', function() {
+            if(this.checked) {
+                // BADDIE MODE ACTIVATED
+                audioCutie.pause();
+                audioBaddie.play();
+                
+                // Swaps to Baddie Photo
+                profilePic.src = "https://github.com/rezawahyuramadhani01-droid/ketrin-birthday/raw/main/baddie-photo.jpg";
+                
+                body.classList.add('baddie-mode');
+                greeting.innerText = "HBD KETRIN.";
+                message.innerText = "To the coolest, most unstoppable girl I know. Own your day.";
+            } else {
+                // CUTIE MODE ACTIVATED
+                audioBaddie.pause();
+                audioCutie.play();
+                
+                // Swaps back to Cutie Photo
+                profilePic.src = "https://github.com/rezawahyuramadhani01-droid/ketrin-birthday/raw/main/cutie-photo.jpg";
+                
+                body.classList.remove('baddie-mode');
+                greeting.innerText = "Happy Birthday, Ketrin!";
+                message.innerText = "To the girl who makes every day brighter. Hope your birthday is as sweet and amazing as you are!";
+            }
+        });
+    </script>
+</body>
+</html>
+
